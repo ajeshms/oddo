@@ -31,7 +31,7 @@ app.controller('app', ['$scope','seven','$state',
             $scope.logout = function() {
                     seven.showIndicator();
                     setTimeout(function(){
-                        delete localStorage.token;
+                        delete localStorage.tokenOddo;
                         seven.hideIndicator();
                         window.location.href = '#/authenticate/login';
                     },1000)
