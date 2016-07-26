@@ -1,7 +1,7 @@
 app.config(['$stateProvider','$urlRouterProvider',
   function(  $stateProvider , $urlRouterProvider ) {
           
-          $urlRouterProvider.otherwise('app/sales_list');
+          $urlRouterProvider.otherwise('app/home');
           $stateProvider
               .state('app', {
                   abstract: true,
