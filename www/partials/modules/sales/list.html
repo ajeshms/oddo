@@ -1,0 +1,49 @@
+<div data-page="tabs-static" class="page toolbar-fixed">
+  <div class="navbar">
+    <div class="navbar-inner">
+      <div class="left"><a href="#/app/home" class="back link icon-only"><i class="icon icon-back"></i></a></div>
+      <div class="center"> Daily Sales</div>
+    </div>
+  </div>
+  
+  
+
+    <!-- Pop Over -->
+  <a style="background-color:#e3a703" href="#/app/sales_add" class="floating-button"><i class="icon icon-plus"></i></a>
+
+
+  
+  <!-- <div class="page-content" style="padding-top: 56px;"> -->
+  <div class="page-content" style="padding-top: 23px;">
+    
+  
+    <div class="list-block">
+      <ul>
+        <li ng-repeat="dta in data">
+          <a href="#/app/sales_detail/{{dta.id}}" class="item-link no-ripple">
+            <p class="color-gray x_time">Daily Sales - {{dta.sale_date | date}}</p>
+
+            <div class="item-content">
+
+              <div class="item-inner"> 
+                <div class="item-title">Rs:{{dta.credit}}</div>
+                <!-- <div class="item-after">{{dta.Commodity}}</div> -->
+              </div>
+            </div>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <div ng-if="!data.length && !loading" class="card">
+      <div class="card-content">
+        <div class="card-content-inner"> 
+          <p style="color:#e70707">No sales found</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</div>
+
