@@ -14,13 +14,42 @@
 
   <div class="page-content">
     
-
+    <div class="content-block">
+        <div class="chip x_chip">
+          <div class="chip-media bg-blue">
+            <!-- <i class="icon ks-icon-calendar"></i> -->
+            <!-- <i class="fa fa-bar-chart" aria-hidden="true"></i> -->
+            <i class="fa fa-check-square-o" aria-hidden="true"></i>
+          </div>
+          <div class="chip-label">Total : {{data.amount_total}} </div>
+        </div>
+        <!-- <div class="chip">
+          <div class="chip-media bg-purple"><i class="icon ks-icon-email"></i></div>
+          <div class="chip-label">Sent</div>
+        </div> -->
+        <div class="chip x_chip">
+          <div class="chip-media bg-red">
+            <!-- <i class="icon ks-icon-upload"></i> -->
+            <i class="fa fa-bar-chart" aria-hidden="true"></i>
+          </div>
+          <div class="chip-label">Average sales : {{data.amount_avg}} </div>
+        </div>
+    </div>
     
     <div class="card">
       <!-- <div class="card-header"> </div> -->
+
+
+      
+
+
+
       <div class="card-content"> 
         <div class="list-block media-list">
           <ul>
+
+
+
             <li class="item-content">
               <div class="item-inner">
                 <div class="item-subtitle">Sale Date</div>
@@ -29,6 +58,20 @@
                 </div>
               </div>
             </li>
+
+
+
+            <li class="item-content">
+              <div class="item-inner">
+                <div class="item-subtitle">Company name</div>
+                <div class="item-title-row">
+                  <div class="item-title">{{data.company_id[1]}}</div>
+                </div>
+              </div>
+            </li>
+
+
+
             
             <li class="item-content">
               <div class="item-inner">
@@ -52,6 +95,28 @@
                 <div class="item-subtitle">Card</div>
                 <div class="item-title-row">
                   <div class="item-title">{{data.card}}</div>
+                </div>
+              </div>
+            </li>
+
+
+            
+
+            <li class="item-content">
+              <div class="item-inner">
+                <div class="item-subtitle">Payable</div>
+                <div class="item-title-row">
+                  <div class="item-title">{{data.payables}}</div>
+                </div>
+              </div>
+            </li>
+
+
+            <li class="item-content">
+              <div class="item-inner">
+                <div class="item-subtitle">Consumption</div>
+                <div class="item-title-row">
+                  <div class="item-title">{{data.close_value}}</div>
                 </div>
               </div>
             </li>

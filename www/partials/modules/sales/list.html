@@ -22,12 +22,14 @@
         <li ng-repeat="dta in data">
           <a href="#/app/sales_detail/{{dta.id}}" class="item-link no-ripple">
             <p class="color-gray x_time">Daily Sales - {{dta.sale_date | date}}</p>
+            <p class="color-gray x_company"> {{dta.company_id[1]}}</p>
 
             <div class="item-content">
 
               <div class="item-inner"> 
-                <div class="item-title">Rs:{{dta.credit}}</div>
-                <!-- <div class="item-after">{{dta.Commodity}}</div> -->
+                <div class="item-title">Total : {{dta.amount_total}} Rs</div>
+                <div class="item-title">Average: {{dta.amount_avg}} Rs</div>
+                <!-- <div class="item-after"> {{dta.amount_avg}}</div> -->
               </div>
             </div>
           </a>
