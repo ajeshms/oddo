@@ -1,5 +1,6 @@
 app.service("fns", ['$http','C', function( $http , C ) {
     this.db = {};
+    console.log(C);
     // Creating the database
     this.createDatabase = function() { 
 		    	try {
@@ -18,6 +19,7 @@ app.service("fns", ['$http','C', function( $http , C ) {
 				    return false;
 				}
 	}
+
     // Creating the table
 	this.createTables   = function() {
 			// this.db.transaction(function(tx){
@@ -25,20 +27,11 @@ app.service("fns", ['$http','C', function( $http , C ) {
 			// 	   			tx.executeSql( 'DROP TABLE Test');
 			// 	   			console.log('Drop');
 			// });
-			var procurement_main 	= 'CREATE TABLE IF NOT EXISTS Procurement (ProcurementId INTEGER PRIMARY KEY AUTOINCREMENT, JsonContent TEXT, ServerId int)';
-			this.query(procurement_main,[],function(res){
+			var sales_table_query 	= 'CREATE TABLE IF NOT EXISTS sales (sales_id INTEGER PRIMARY KEY AUTOINCREMENT,id int, sale_date DATE, credit DATE, cash int, card TEXT,company_id TEXT,amount_total int,payables int,amount_avg int,close_value int)';
+			this.query(sales_table_query,[],function(res){
 				console.log(res);
 			});
 
-			var procurement_imgs 	= 'CREATE TABLE IF NOT EXISTS Procurement_Images (ProcureImgId INTEGER PRIMARY KEY AUTOINCREMENT, ProcureId int, ImageUrl TEXT, ServerId int)';
-			this.query(procurement_imgs,[],function(res){
-				console.log(res);
-			});
-
-			var query1 	= 'CREATE TABLE IF NOT EXISTS Test (TestId INTEGER PRIMARY KEY AUTOINCREMENT, ProcurementId INTEGER, Damaged TEXT, DisColoured TEXT, ChalkyGrain TEXT, RedGrains TEXT, AdMixtures TEXT, DeHusked TEXT, Moisture TEXT)';
-			this.query(query1,[],function(res){
-				console.log(res);
-			});
 	}
 	//Querying the db
 	this.query  = function(query,parameters,callback) {
@@ -60,4 +53,3 @@ app.service("fns", ['$http','C', function( $http , C ) {
 			});
 	}
 }]);
-

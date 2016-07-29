@@ -13,10 +13,6 @@ function onDeviceReady() {
         }, false );
 }
 
-/* Creating the config */
-angular.module('configs', []).constant('C', {
-    'name'  : 'ODDO App'
-});
 
 /* Creating Module app */
 var app = angular.module('app', [
@@ -40,8 +36,8 @@ app.config(['$controllerProvider','$compileProvider','$filterProvider','$provide
 
 
 /*Run Phase*/
-app.run(['$rootScope','$state','$stateParams','seven',
-function( $rootScope , $state , $stateParams , seven ) {
+app.run(['$rootScope','$state','$stateParams','seven','fns',
+function( $rootScope , $state , $stateParams , seven , fns ) {
         console.log('Run'); 
            
 
@@ -57,6 +53,16 @@ function( $rootScope , $state , $stateParams , seven ) {
         $rootScope.$on('$stateChangeSuccess', function() {
               document.body.scrollTop = document.documentElement.scrollTop = 0;
         });
+
+
+        console.log('Creating db....');
+        var dbCreate = fns.createDatabase();  
+        if (dbCreate) {
+            console.log('db created');
+            tables = fns.createTables(dbCreate);
+        }
+
+
 
 }])
 

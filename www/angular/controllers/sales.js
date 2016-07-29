@@ -1,17 +1,32 @@
-app.controller('sales_list', ['$scope','fns','seven','services',
-    function ( $scope , fns , seven, services ) {
+app.controller('sales_list', ['$scope','fns','seven','services','fns',
+    function ( $scope , fns , seven, services ,fns) {
         seven.showPreloader();
         $scope.datalogin = {};
         $scope.datalogin.username = localStorage.usernameOddo;
         $scope.datalogin.password = localStorage.passwordOddo;
         $scope.data = [];
         $scope.loading = true; 
-        services.master('api.php?req=sales_list',$scope.datalogin).then(function(res){
-            console.log(res.data);
-            $scope.data = res.data;
-            $scope.loading = false;
-            seven.hidePreloader();
-        });
+        // services.master('api.php?req=sales_list',$scope.datalogin).then(function(res){
+        $scope.populate = function() {
+                        fns.query('SELECT * FROM sales',[],function(res){
+                            console.log(res.result.rows);
+                            $scope.data = [];
+                            for (var i = 0;k = res.result.rows.length, i< k; i++) {
+                                res.result.rows.item(i).company_id = JSON.parse(res.result.rows.item(i).company_id);
+                                $scope.data.push(res.result.rows.item(i));
+                            }
+                            for (var i = $scope.data.length - 1; i >= 0; i--) {
+                                $scope.data[i].company_id = JSON.parse($scope.data[i].company_id);
+                            };
+                            $scope.$apply();
+                            setTimeout(function(){
+                                seven.hidePreloader();
+                            },333)
+                        });
+        }
+
+        $scope.populate();
+        
      
 }]);
 
@@ -27,33 +42,16 @@ app.controller('sales_detail', ['$scope','fns','seven','services','$stateParams'
         $scope.datalogin.password = localStorage.passwordOddo;
         $scope.data = [];
         $scope.loading = true; 
-        services.master('api.php?req=sales_detail',$scope.datalogin).then(function(res){
-            console.log(res.data);
-            $scope.data = res.data[0];
-            $scope.loading = false;
-            seven.hidePreloader();
+
+        fns.query('SELECT * FROM sales WHERE id = ?',[$scope.datalogin.id],function(res){
+                var i = 0;
+                console.log(res);
+                $scope.data = res.result.rows.item(i);
+                $scope.data.company_id = JSON.parse($scope.data.company_id);
+                $scope.$apply();
+                seven.hidePreloader();
         });
 
-
-
-        $rootScope.delete   = function(){
-                setTimeout(function () {
-                        seven.confirm('Are you sure to delete?',function(){
-                                seven.showPreloader();
-
-                                services.master('api.php?req=sales_delete',$scope.datalogin).then(function(res){
-                                        seven.hidePreloader();
-                                        seven.alert('Deleted Successfully','Alert',function(){
-                                                    window.location = '#/app/sales_detail'
-                                        });
-                                });
-
-                        });
-                },100);
-        }
-
-
-     
 }]);
 
 
