@@ -12,14 +12,10 @@ app.controller('sales_list', ['$scope','fns','seven','services','fns',
                             console.log(res.result.rows);
                             $scope.data = [];
                             for (var i = 0;k = res.result.rows.length, i< k; i++) {
-                                res.result.rows.item(i).company_id = JSON.parse(res.result.rows.item(i).company_id);
                                 $scope.data.push(res.result.rows.item(i));
                             }
-                            for (var i = $scope.data.length - 1; i >= 0; i--) {
-                                $scope.data[i].company_id = JSON.parse($scope.data[i].company_id);
-                            };
-                            $scope.$apply();
                             setTimeout(function(){
+                                $scope.$apply();
                                 seven.hidePreloader();
                             },333)
                         });
@@ -42,14 +38,13 @@ app.controller('sales_detail', ['$scope','fns','seven','services','$stateParams'
         $scope.datalogin.password = localStorage.passwordOddo;
         $scope.data = [];
         $scope.loading = true; 
-
         fns.query('SELECT * FROM sales WHERE id = ?',[$scope.datalogin.id],function(res){
                 var i = 0;
-                console.log(res);
                 $scope.data = res.result.rows.item(i);
-                $scope.data.company_id = JSON.parse($scope.data.company_id);
                 $scope.$apply();
-                seven.hidePreloader();
+                setTimeout(function(){
+                    seven.hidePreloader();
+                },333)
         });
 
 }]);

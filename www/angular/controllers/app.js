@@ -56,12 +56,8 @@ app.controller('app', ['$scope','seven','$state','services','fns','$rootScope',
                                 console.log(res.result.rows);
                                 $scope.data = [];
                                 for (var i = 0;k = res.result.rows.length, i< k; i++) {
-                                    res.result.rows.item(i).company_id = JSON.parse(res.result.rows.item(i).company_id);
                                     $scope.data.push(res.result.rows.item(i));
                                 }
-                                for (var i = $scope.data.length - 1; i >= 0; i--) {
-                                    $scope.data[i].company_id = JSON.parse($scope.data[i].company_id);
-                                };
                                 setTimeout(function(){
                                     window.location.reload();
                                 },200)
@@ -71,11 +67,11 @@ app.controller('app', ['$scope','seven','$state','services','fns','$rootScope',
                         fns.query('DELETE FROM sales',[],function() {
                             for (var i = 0 ; i < res.data.length; i++) {
                                 console.log(res.data[i]);
-                                fns.query('INSERT into sales (id,sale_date,credit,cash,card,company_id,amount_total,payables,amount_avg,close_value) VALUES (?,?,?,?,?,?,?,?,?,?)', [res.data[i].id,res.data[i].sale_date,res.data[i].credit,res.data[i].cash,res.data[i].card,JSON.stringify(res.data[i].company_id),res.data[i].amount_total,res.data[i].payables,res.data[i].amount_avg,res.data[i].close_value],function(res){
+                                fns.query('INSERT into sales (id,sale_date,credit,cash,card,company_id,company_name,amount_total,payables,amount_avg,close_value) VALUES (?,?,?,?,?,?,?,?,?,?,?)', [res.data[i].id,res.data[i].sale_date,res.data[i].credit,res.data[i].cash,res.data[i].card,res.data[i].company_id[0],res.data[i].company_id[1],res.data[i].amount_total,res.data[i].payables,res.data[i].amount_avg,res.data[i].close_value],function(res){
                                     
                                 });
                             };
-                            $scope.datum();
+                           $scope.datum();
 
                         });
                         
