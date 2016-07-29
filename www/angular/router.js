@@ -34,6 +34,21 @@ app.config(['$stateProvider','$urlRouterProvider',
                   templateUrl: 'partials/modules/sales/edit.html',
                   controller: 'sales_edit'
               })
+
+              .state('app.reports', {
+                  url: '/reports',
+                  templateUrl: 'partials/modules/reports/page.html',
+                  // controller: 'sales_edit'
+              })
+
+              .state('app.reports_date_wise', {
+                  url: '/reports_date_wise',
+                  templateUrl: 'partials/modules/reports/date_wise_page.html',
+                  controller: 'reports_date_wise'
+              })
+
+
+
               /*Authenticate*/
               .state('authenticate', {
                   abstract: true,

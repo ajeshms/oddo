@@ -1,27 +1,89 @@
-app.controller('sales_list', ['$scope','fns','seven','services','fns',
-    function ( $scope , fns , seven, services ,fns) {
+app.controller('sales_list', ['$scope','fns','seven','services','fns','$filter',
+    function ( $scope , fns , seven, services ,fns, $filter) {
         seven.showPreloader();
-        $scope.datalogin = {};
+        $scope.datalogin        = {};
         $scope.datalogin.username = localStorage.usernameOddo;
         $scope.datalogin.password = localStorage.passwordOddo;
-        $scope.data = [];
-        $scope.loading = true; 
-        // services.master('api.php?req=sales_list',$scope.datalogin).then(function(res){
-        $scope.populate = function() {
-                        fns.query('SELECT * FROM sales',[],function(res){
-                            console.log(res.result.rows);
-                            $scope.data = [];
-                            for (var i = 0;k = res.result.rows.length, i< k; i++) {
-                                $scope.data.push(res.result.rows.item(i));
-                            }
-                            setTimeout(function(){
-                                $scope.$apply();
-                                seven.hidePreloader();
-                            },333)
-                        });
+        $scope.data             = [];
+        $scope.loading          = true; 
+        $scope.companies        = [];
+        $scope.filter           = {};
+        $scope.filter.date      = '';
+        $scope.filter.company   = '';
+
+        fns.query('SELECT company_id, company_name FROM sales GROUP BY company_id',[],function(res){
+            console.log(res.result.rows);
+            for (var i = 0;k = res.result.rows.length, i< k; i++) {
+                $scope.companies.push(res.result.rows.item(i));
+            }
+        });
+
+
+        $scope.populate = function(qry) {
+                fns.query(qry,[],function(res){
+                    console.log(res.result.rows);
+                    $scope.data = [];
+                    for (var i = 0;k = res.result.rows.length, i< k; i++) {
+                        $scope.data.push(res.result.rows.item(i));
+                    }
+                    setTimeout(function(){
+                        $scope.loading = false; 
+                        $scope.$apply();
+                        seven.hidePreloader();
+                    },333)
+                });
         }
 
-        $scope.populate();
+        $scope.populate('SELECT * FROM sales');
+
+        $scope.detail_view = function(ind) {
+            seven.showPreloader();
+            $scope.detail = $scope.data[ind];
+            $('#list_block').hide();
+            $('#detail_block').show();
+            seven.hidePreloader();
+        }
+
+
+        $scope.list_view = function() {
+            $('#list_block').show();
+            $('#detail_block').hide();
+            $('#filter_block').hide();
+        }
+
+        $scope.filter_modal = function() {
+            $('#list_block').hide();
+            $('#filter_block').show();
+        }
+
+        $scope.filter_now = function() {
+                $scope.loading          = true; 
+                seven.showPreloader();
+                if($scope.filter.date != ''){
+                    $scope.filter.dater   = $filter('date')(new Date($scope.filter.date), "yyyy-MM-dd");
+                    qry = 'SELECT * FROM sales WHERE sale_date="'+$scope.filter.dater+'"';
+                }
+                if($scope.filter.company != '') {
+                    qry = 'SELECT * FROM sales WHERE company_id="'+$scope.filter.company+'"';
+                }
+                if($scope.filter.date != '' && $scope.filter.company != '') {
+                    qry = 'SELECT * FROM sales WHERE company_id="'+$scope.filter.company+'" AND sale_date="'+$scope.filter.dater+'"';
+                }
+                if($scope.filter.date == '' && $scope.filter.company == ''){
+                    qry = 'SELECT * FROM sales';
+                }
+                $scope.list_view();
+                $scope.populate(qry);
+        }  
+
+        $scope.reset_now = function() {
+                $scope.loading          = true; 
+                seven.showPreloader();
+                $scope.filter.date = '';
+                $scope.filter.dater = '';
+                $scope.list_view();
+                $scope.populate('SELECT * FROM sales');
+        }   
         
      
 }]);

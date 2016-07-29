@@ -1,29 +1,34 @@
-<div data-page="tabs-static" class="page toolbar-fixed">
+<style type="text/css">
+#detail_block, #filter_block {
+  display: none;
+}
+
+</style>
+
+<!-- For List Starts -->
+<div data-page="tabs-static" id="list_block" class="page toolbar-fixed">
   <div class="navbar">
     <div class="navbar-inner">
-      <div class="left"><a href="#/app/home" class="back link icon-only"><i class="icon icon-back"></i></a></div>
+      <div class="left"><a href="#/app/home" class="back link icon-only  no-ripple"><i class="icon icon-back"></i></a></div>
       <div class="center"> Daily Sales</div>
-      <div class="right"><a ng-click="getDbDatas()" class="link icon-only"><i class="fa fa-retweet" aria-hidden="true"></i></a></div>
+      <div class="right">
+        <a ng-click="filter_modal()" class="link icon-only no-ripple"><i class="fa fa-search" aria-hidden="true"></i></a>
+        <a ng-click="getDbDatas()" class="link icon-only no-ripple"><i class="fa fa-retweet" aria-hidden="true"></i></a>  
+      </div>
 
 
     </div>
   </div>
   
-  
-
-    <!-- Pop Over -->
-  <!-- <a style="background-color:#e3a703" href="#/app/sales_add" class="floating-button"><i class="icon icon-plus"></i></a> -->
-
 
   
   <!-- <div class="page-content" style="padding-top: 56px;"> -->
   <div class="page-content" style="padding-top: 23px;">
-    
-  
     <div class="list-block">
       <ul>
         <li ng-repeat="dta in data">
-          <a href="#/app/sales_detail/{{dta.id}}" class="item-link no-ripple">
+          <!-- <a href="#/app/sales_detail/{{dta.id}}" class="item-link no-ripple"> -->
+          <a ng-click="detail_view($index)" class="item-link no-ripple">
             <p class="color-gray x_time">Daily Sales - {{dta.sale_date | date}}</p>
             <p class="color-gray x_company"> {{dta.company_name}}</p>
 
@@ -31,8 +36,7 @@
 
               <div class="item-inner"> 
                 <div class="item-title">Total : {{dta.amount_total}} Rs</div>
-                <div class="item-title">Average: {{dta.amount_avg}} Rs</div>
-                <!-- <div class="item-after"> {{dta.amount_avg}}</div> -->
+                <div class="item-title">Average: {{dta.amount_avg}} Rs</div> 
               </div>
             </div>
           </a>
@@ -41,14 +45,208 @@
     </div>
 
     <div ng-if="!data.length && !loading" class="card">
-      <div class="card-content">
+      <div class="card-content" style="    margin-top: 44px;">
         <div class="card-content-inner"> 
-          <p style="color:#e70707">No sales found</p>
+          <p style="color:#e70707">No data found</p>
         </div>
       </div>
     </div>
   </div>
-
-
 </div>
+<!-- For List Ends -->
 
+<!-- For Detail starts -->
+<div data-page="cards" id="detail_block" class="page">
+  <div class="navbar">
+    <div class="navbar-inner">
+      <div class="left"><a ng-click="list_view()" class="back link icon-only no-ripple"><i class="icon icon-back"></i></a></div>
+      <div class="center">Sales detail</div>
+      <div class="right"> 
+        <!-- <a data-popover=".popover-menu" class="x_link no-ripple icon-only open-popover"><i class="icon ks-icon-more"></i></a>  -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Pop Over -->
+  <!-- <a style="background-color:#e3a703" href="#/app/sales_add" class="floating-button"><i class="icon icon-plus"></i></a> -->
+
+  <div class="page-content">
+    
+    <div class="content-block">
+        <div class="chip x_chip">
+          <div class="chip-media bg-blue">
+            <i class="fa fa-check-square-o" aria-hidden="true"></i>
+          </div>
+          <div class="chip-label">Total : {{detail.amount_total}} </div>
+        </div>
+       
+        <div class="chip x_chip">
+          <div class="chip-media bg-red">
+            <i class="fa fa-bar-chart" aria-hidden="true"></i>
+          </div>
+          <div class="chip-label">Average sales : {{detail.amount_avg}} </div>
+        </div>
+    </div>
+    
+    <div class="card">
+
+      <div class="card-content"> 
+        <div class="list-block media-list">
+          <ul>
+
+
+
+            <li class="item-content">
+              <div class="item-inner">
+                <div class="item-subtitle">Sale Date</div>
+                <div class="item-title-row">
+                  <div class="item-title">{{detail.sale_date | date}}</div>
+                </div>
+              </div>
+            </li>
+
+
+
+            <li class="item-content">
+              <div class="item-inner">
+                <div class="item-subtitle">Company name</div>
+                <div class="item-title-row">
+                  <div class="item-title">{{detail.company_name}}</div>
+                </div>
+              </div>
+            </li>
+
+
+
+            
+            <li class="item-content">
+              <div class="item-inner">
+                <div class="item-subtitle">Cash</div>
+                <div class="item-title-row">
+                  <div class="item-title">{{detail.cash }}</div>
+                </div>
+              </div>
+            </li>
+            <li class="item-content">
+              <div class="item-inner">
+                <div class="item-subtitle">Credit</div>
+                <div class="item-title-row">
+                  <div class="item-title">{{detail.credit}}</div>
+                </div>
+              </div>
+            </li>
+
+            <li class="item-content">
+              <div class="item-inner">
+                <div class="item-subtitle">Card</div>
+                <div class="item-title-row">
+                  <div class="item-title">{{detail.card}}</div>
+                </div>
+              </div>
+            </li>
+
+
+            
+
+            <li class="item-content">
+              <div class="item-inner">
+                <div class="item-subtitle">Payable</div>
+                <div class="item-title-row">
+                  <div class="item-title">{{detail.payables}}</div>
+                </div>
+              </div>
+            </li>
+
+
+            <li class="item-content">
+              <div class="item-inner">
+                <div class="item-subtitle">Consumption</div>
+                <div class="item-title-row">
+                  <div class="item-title">{{detail.close_value}}</div>
+                </div>
+              </div>
+            </li>
+
+            
+
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- For Detail Ends -->
+
+<!-- For filter settings -->
+<div class="page" id="filter_block">
+  <div class="navbar">
+    <div class="navbar-inner">
+      <div class="left"><a ng-click="list_view()" class="back link icon-only no-ripple"><i class="icon icon-back"></i></a></div>
+      <div class="center">Filter by ..</div>
+      <div class="right"> 
+      </div>
+    </div>
+  </div>
+
+  <div class="page-content">
+
+    
+    <div class="card">
+
+      <div class="card-content"> 
+            
+            <div class="list-block inputs-list">
+              <ul>
+                <li>
+                  <div class="item-content">
+                    <div class="item-inner"> 
+                      <div class="item-title label">Date</div>
+                      <div class="item-input item-input-field">
+                        <input type="date" ng-model="filter.date" placeholder="Select Date">
+                      </div>
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <div class="item-content">
+                    <div class="item-inner"> 
+                      <div class="item-title label">Company</div>
+                      <div class="item-input item-input-field">
+                        <select  ng-model="filter.company" ng-options="option.company_id as option.company_name for option in companies">
+                            </select>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <div class="item-content">
+                    <div class="item-inner"> 
+                      <div class="item-title label">Switch</div>
+                      <div class="item-input">
+                        <label class="label-switch">
+                          <input type="checkbox">
+                          <div class="checkbox"></div>
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+
+
+              <div class="content-block">
+                    <p style="padding-bottom:12px" class="buttons-row">
+                      <button ng-click="filter_now()" class="button button-fill button-raised color-teal no-ripple"> Filter Result </button>
+                      <button type="reset" ng-click="reset_now()" class="button button-raised x_color-white no-ripple"> Reset Result </button>
+                    </p>
+              </div>
+
+
+
+            </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Filter settings -->
