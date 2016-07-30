@@ -223,3 +223,8 @@ i.icon.icon-bars {
     height: 45px;
     width: 45px;
 }
+
+
+#detail_block, #filter_block {
+  display: none;
+}

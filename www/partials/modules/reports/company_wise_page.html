@@ -2,7 +2,7 @@
   <div class="navbar">
     <div class="navbar-inner">
       <div class="left"><a href="#/app/reports" class="back link icon-only"><i class="icon icon-back"></i></a></div>
-      <div class="center">Date wise Reports</div>
+      <div class="center">Company wise Reports</div>
       <div class="right">
          <a ng-click="filter_modal()" class="link icon-only no-ripple"><i class="fa fa-search" aria-hidden="true"></i></a>
       </div>
@@ -10,7 +10,7 @@
   </div>
   <div class="page-content">
 
-    <div class="content-block-title">Links, no icons</div>
+    <div class="content-block-title"></div>
     <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
 
   </div>
@@ -38,7 +38,7 @@
             
             <div class="list-block inputs-list">
               <ul>
-                <li>
+                <!-- <li>
                   <div class="item-content">
                     <div class="item-inner"> 
                       <div class="item-title label">Start Date</div>
@@ -57,20 +57,20 @@
                       </div>
                     </div>
                   </div>
-                </li>
+                </li> -->
 
 
-                <!-- <li>
+                <li>
                   <div class="item-content">
                     <div class="item-inner"> 
                       <div class="item-title label">Company</div>
                       <div class="item-input item-input-field">
-                        <select  ng-model="filter.company" ng-options="option.company_id as option.company_name for option in companies">
+                        <select multiple="true" ng-model="filter.company" ng-options="option.company_id as option.company_name for option in companies">
                             </select>
                       </div>
                     </div>
                   </div>
-                </li> -->
+                </li>
                 <!-- <li>
                   <div class="item-content">
                     <div class="item-inner"> 
