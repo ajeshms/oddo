@@ -12,7 +12,6 @@ app.controller('sales_list', ['$scope','fns','seven','services','fns','$filter',
         $scope.filter.company   = '';
 
         fns.query('SELECT company_id, company_name FROM sales GROUP BY company_id',[],function(res){
-            console.log(res.result.rows);
             for (var i = 0;k = res.result.rows.length, i< k; i++) {
                 $scope.companies.push(res.result.rows.item(i));
             }

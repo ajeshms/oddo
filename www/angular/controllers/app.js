@@ -36,15 +36,17 @@ app.controller('app', ['$scope','seven','$state','services','fns','$rootScope',
                         window.location.href = '#/authenticate/login';
                     },1000)
             }
-            $scope.profile = JSON.parse(localStorage.userDetails);
-            console.log($scope.profile);
+            $scope.profile = JSON.parse(localStorage.userDetails); 
             // Go back function
             $scope.goBack = function() {
                 window.history.go(-1);
             }
 
             $scope.getDbDatas = function() {
-                    console.log('Getting the db datas');
+
+                    if(!navigator.onLine) {
+                        seven.alert('Error.. Please check your internet connectivity'); return;
+                    }
                     seven.showPreloader('Fetching datas from db');
                     $scope.datalogin = {};
                     $scope.datalogin.username = localStorage.usernameOddo;
