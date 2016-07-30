@@ -235,12 +235,9 @@ app.controller('reports_company_wise', ['$scope','fns','seven','$state','$filter
 
 
         $scope.reset_now = function() {
-                $scope.filter.start_date = '';
-                $scope.filter.start_dater = '';
-                $scope.filter.end_date = '';
-                $scope.filter.end_dater = '';
+                $scope.filter.company         = [];
                 $scope.list_view();
-                $scope.populate('SELECT sale_date AS date, IFNULL(SUM(amount_total),0) AS total_sales FROM sales GROUP BY date');
+                $scope.populate('SELECT company_name, IFNULL(SUM(amount_total),0) AS total_sales FROM sales GROUP BY company_id');
         }   
 }]);
 
