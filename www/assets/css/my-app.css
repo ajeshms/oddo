@@ -223,7 +223,11 @@ i.icon.icon-bars {
     height: 45px;
     width: 45px;
 }
-
+.x-checkbox {
+    /*font-size: 2em;*/
+     width: 30px; /*Desired width*/
+  height: 30px; /*Desired height*/
+}
 
 #detail_block, #filter_block {
   display: none;

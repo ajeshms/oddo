@@ -117,8 +117,8 @@ app.controller('reports_company_wise', ['$scope','fns','seven','$state','$filter
         $scope.filter = {}
         $scope.filter.start_date      = '';
         $scope.filter.end_date        = '';
-        $scope.filter.company          = '';
-        $scope.companies            = [];
+        $scope.filter.company         = [];
+        $scope.companies                = [];
 
         seven.hideIndicator();
 
@@ -205,19 +205,30 @@ app.controller('reports_company_wise', ['$scope','fns','seven','$state','$filter
             $('#filter_block').hide();
         }
 
+
+        $scope.toggleSelection = function (company_id) {
+            setTimeout(function(){
+                var idx = $scope.filter.company.indexOf(company_id);
+                if (idx > -1) {
+                  $scope.filter.company.splice(idx, 1);
+                }
+                else {
+                  $scope.filter.company.push(company_id);
+                }
+            },500);
+        }
+
+
+
         $scope.filter_now = function() {
-                
-                if($scope.filter.company == '' ){
-                    seven.alert('Please select companies/company');
+                if($scope.filter.company.length == 0 ){
+                    seven.alert('Please select companies (or) company');
                     return;
                 }
-                $scope.filter.company.push(12);
-                console.log($scope.filter.company);
                 // $scope.filter.start_dater   = $filter('date')(new Date($scope.filter.start_date), "yyyy-MM-dd");
                 // $scope.filter.end_dater     = $filter('date')(new Date($scope.filter.end_date), "yyyy-MM-dd");
 
                 qry = 'SELECT company_name, IFNULL(SUM(amount_total),0) AS total_sales FROM sales WHERE company_id IN ('+$scope.filter.company+') GROUP BY company_id';
-                console.log(qry);
                 $scope.list_view();
                 $scope.populate(qry);
         }  

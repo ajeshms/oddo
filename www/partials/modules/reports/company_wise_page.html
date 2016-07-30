@@ -65,8 +65,49 @@
                     <div class="item-inner"> 
                       <div class="item-title label">Company</div>
                       <div class="item-input item-input-field">
-                        <select multiple="true" ng-model="filter.company" ng-options="option.company_id as option.company_name for option in companies">
-                            </select>
+                        <!-- <select multiple="true" ng-model="filter.company" ng-options="option.company_id as option.company_name for option in companies">
+                            </select> -->
+
+                            <div class="list-block">
+                              <ul style="padding-left: 0px;">
+                                <!-- <li  ng-repeat="company in companies">
+                                  <label class="label-checkbox item-content no-ripple">
+                                      <div class="item-media"><i class="icon icon-form-checkbox"></i></div>
+                                      <div class="item-inner">
+                                        <div class="item-title">{{company.company_name}}</div>
+                                      </div>
+                                      <input 
+                                        type="checkbox" 
+                                        name="selected_companies[]" 
+                                        value="{{company.company_id}}"
+                                        ng-checked="filter.company.indexOf(company.company_id) > -1"
+                                           ng-click="toggleSelection(company.company_id)"
+                                      >
+                                  </label>
+                                </li> -->
+
+
+                                <li  ng-repeat="company in companies">
+
+                                 
+                                  <label ng-click="toggleSelection(company.company_id)" class="label-checkbox item-content no-ripple">
+                                       <input 
+                                        class="x-checkbox"
+                                        type="checkbox" 
+                                        name="selected_companies[]" 
+                                        value="{{company.company_id}}"
+                                        ng-checked="filter.company.indexOf(company.company_id) > -1"
+                                      >
+                                      <div class="item-media"><i class="icon icon-form-checkbox"></i></div>
+                                      <div class="item-inner" style="margin-left: 0px;padding-top: 15px;">
+                                        <div class="item-title">{{company.company_name}}</div>
+                                      </div>
+                                      
+                                  </label>
+                                </li>
+                     
+                              </ul>
+                            </div>
                       </div>
                     </div>
                   </div>
