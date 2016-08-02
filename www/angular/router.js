@@ -54,6 +54,12 @@ app.config(['$stateProvider','$urlRouterProvider',
                   controller: 'reports_company_wise'
               })
 
+              .state('app.reports_comparison', {
+                  url: '/reports_comparison',
+                  templateUrl: 'partials/modules/reports/reports_comparison.html',
+                  controller: 'reports_comparison'
+              })
+
 
 
               /*Authenticate*/

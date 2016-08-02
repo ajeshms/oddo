@@ -90,7 +90,7 @@
                                 <li  ng-repeat="company in companies">
 
                                  
-                                  <label ng-click="toggleSelection(company.company_id)" class="label-checkbox item-content no-ripple">
+                                  <label ng-click="toggleSelection(company.company_id)" class="label-checkboxx item-content no-ripple">
                                        <input 
                                         class="x-checkbox"
                                         type="checkbox" 
@@ -98,9 +98,9 @@
                                         value="{{company.company_id}}"
                                         ng-checked="filter.company.indexOf(company.company_id) > -1"
                                       >
-                                      <div class="item-media"><i class="icon icon-form-checkbox"></i></div>
+                                      <!-- <div class="item-media"><i class="icon icon-form-checkbox"></i></div> -->
                                       <div class="item-inner" style="margin-left: 0px;padding-top: 15px;">
-                                        <div class="item-title">{{company.company_name}}</div>
+                                        <div class="item-title"> {{company.company_name}}</div>
                                       </div>
                                       
                                   </label>

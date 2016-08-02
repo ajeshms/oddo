@@ -1,0 +1,93 @@
+<div data-page="list-view" id="list_block" class="page page-on-center">
+  <div class="navbar">
+    <div class="navbar-inner">
+      <div class="left"><a href="#/app/reports" class="back link icon-only"><i class="icon icon-back"></i></a></div>
+      <div class="center">Comparison Reports</div>
+      <div class="right">
+         <a ng-click="filter_modal()" class="link icon-only no-ripple"><i class="fa fa-search" aria-hidden="true"></i></a>
+      </div>
+    </div>
+  </div>
+  <div class="page-content">
+
+    <div class="content-block-title">Links, no icons</div>
+    <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+
+  </div>
+</div>
+
+
+
+<!-- For filter settings -->
+<div class="page" id="filter_block">
+  <div class="navbar">
+    <div class="navbar-inner">
+      <div class="left"><a ng-click="list_view()" class="back link icon-only no-ripple"><i class="icon icon-back"></i></a></div>
+      <div class="center">Compare criteria</div>
+      <div class="right"> 
+      </div>
+    </div>
+  </div>
+
+  <div class="page-content">
+
+    
+    <div class="card">
+
+      <div class="card-content"> 
+            
+            <div class="list-block inputs-list">
+              <ul>
+                <li>
+                  <div class="item-content">
+                    <div class="item-inner"> 
+                      <div class="item-title label">Date One</div>
+                      <div class="item-input item-input-field">
+                        <input type="date" ng-model="filter.start_date" placeholder="Select Date">
+                      </div>
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <div class="item-content">
+                    <div class="item-inner"> 
+                      <div class="item-title label">Date Two</div>
+                      <div class="item-input item-input-field">
+                        <input type="date" ng-model="filter.end_date" placeholder="Select Date">
+                      </div>
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <div class="item-content">
+                    <div class="item-inner"> 
+                      <div class="item-title label">Company</div>
+                      <div class="item-input item-input-field">
+                        <select ng-model="filter.company" ng-options="option.company_id as option.company_name for option in companies">
+                            </select>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+
+               
+              </ul>
+
+
+              <div class="content-block">
+                    <p style="padding-bottom:12px" class="buttons-row">
+                      <button ng-click="filter_now()" class="button button-fill button-raised color-teal no-ripple"> Filter Result </button>
+                      <button type="reset" ng-click="reset_now()" class="button button-raised x_color-white no-ripple"> Reset Result </button>
+                    </p>
+              </div>
+
+
+
+            </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Filter settings -->
+
